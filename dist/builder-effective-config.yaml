@@ -1,0 +1,18 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.worldtv.pro
+productName: WorldTV Pro
+win:
+  target: nsis
+  icon: assets/logo/wtu_v2.2.ico
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+extraResources:
+  - filter:
+      - ./bin/**
+files: []
+electronVersion: 28.3.3

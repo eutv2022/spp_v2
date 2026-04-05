@@ -1,0 +1,34 @@
+{
+  "name": "worldtv-pro",
+  "productName": "WorldTV Pro",
+  "version": "1.0.0",
+  "description": "World TV Pro is an advanced media player application and distribution by JBrands.",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "author": "Jhonny",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^26.4.0"
+  },
+  "build": {
+    "appId": "com.worldtv.pro",
+    "productName": "WorldTV Pro",
+    "win": {
+      "target": "nsis",
+      "icon": "assets/logo/wtu_v2.2.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "extraResources": [
+      "./bin/**"
+    ]
+  }
+}

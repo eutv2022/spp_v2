@@ -1,0 +1,204 @@
+/* ========================================== */
+/* ===  ESTILOS DEL MODAL DE SETTINGS     === */
+/* ========================================== */
+
+/* 1. FONDO / OVERLAY */
+.settings-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.settings-modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.settings-modal-content {
+    background-color: var(--panel-bg, #1a1a1a);
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    width: 500px;
+    max-width: 90%;
+    transform: scale(0.9);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.settings-modal-overlay.visible .settings-modal-content {
+    transform: scale(1);
+}
+
+.modal-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-main, #F5E3C0);
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
+}
+
+.modal-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.modal-option-btn {
+    background-color: var(--panel-inner, #111);
+    color: var(--text-sub, #B9B0A3);
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-option-btn.focused {
+    background-color: var(--accent, #FF6A00);
+    color: var(--bg, #000);
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(255, 106, 0, 0.3);
+    font-weight: 700;
+}
+
+.modal-option-btn.selected {
+    border-color: var(--accent, #FF6A00);
+    color: var(--text-main, #fff);
+    background-color: rgba(255, 106, 0, 0.08);
+}
+
+.modal-option-btn.selected::after {
+    content: "●";
+    color: var(--accent, #FF6A00);
+    font-size: 14px;
+}
+
+.modal-option-btn.selected.focused {
+    background-color: var(--accent, #FF6A00);
+    color: #000;
+    border-color: transparent;
+}
+.modal-option-btn.selected.focused::after {
+    color: #000;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.modal-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 50px;
+    padding: 0 30px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: var(--panel-inner, #222);
+    color: var(--text-sub, #ccc);
+    transition: all 0.18s ease;
+    flex: 1;
+}
+
+.modal-action-btn.btn-confirm {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.modal-action-btn.focused {
+    background-color: var(--accent, #FF6A00);
+    color: var(--bg, #000);
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+.modal-action-btn:active {
+    transform: scale(0.95);
+}
+
+.pin-setup-container {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    background: rgba(0,0,0,0.3);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.pin-setup-container.visible {
+    display: flex;
+}
+
+.pin-label {
+    font-size: 14px;
+    color: #aaa;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.pin-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pin-box {
+    width: 50px;
+    height: 60px;
+    background: #333;
+    border: 2px solid #555;
+    border-radius: 8px;
+    color: white;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.pin-row-container.focused .pin-box {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.pin-box.filled {
+    background: #444;
+    color: var(--accent);
+}
+
+.pin-error {
+    color: #ff4444;
+    font-size: 14px;
+    height: 20px;
+}

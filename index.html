@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WorldTV Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="css/FontAwesome/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <main id="app-container"></main>
+
+    <script src="$WEBAPIS/webapis/webapis.js"></script>
+    
+    <script type="module" src="utils/apiModule.js"></script>
+    <script type="module" src="utils/logger.js"></script>
+    <script type="module" src="utils/StatusOverlay.js"></script>
+
+    <script type="module" src="js/db/db.js"></script>
+
+    <script type="module" src="js/core/router.js"></script>
+    <script type="module" src="js/core/homeLoginFocus.js"></script>
+    <script type="module" src="js/core/contentFocus.js"></script>
+    <script type="module" src="js/core/SeriesDetailsFocus.js"></script>
+    <script type="module" src="js/core/MovieDetailsFocus.js"></script>
+    <script type="module" src="js/core/remote.js"></script>
+
+    <script type="module" src="js/services/sessionManager.js"></script>
+    <script type="module" src="js/services/auth.js"></script>
+    <script type="module" src="js/services/dataManager.js"></script> 
+
+    <script type="module" src="js/repositories/LiveTVRepository.js"></script>
+    <script type="module" src="js/repositories/MoviesRepository.js"></script>
+    <script type="module" src="js/repositories/SeriesRepository.js"></script>
+    <script type="module" src="js/repositories/FavoritesRepository.js"></script>
+
+    <script type="module" src="js/views/LoginPage.js"></script>
+    <script type="module" src="js/views/HomePage.js"></script>
+    <script type="module" src="js/views/ContentPage.js"></script>
+    <script type="module" src="js/views/MovieDetails.js"></script>
+    <script type="module" src="js/views/SeriesDetails.js"></script>
+    <script type="module" src="js/views/SettingsPage.js"></script>
+    
+    <script type="module" src="js/views/PlayerPage.js"></script>
+    <script type="module" src="js/main.js"></script>
+
+
+</html>

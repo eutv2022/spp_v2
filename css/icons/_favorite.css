@@ -1,0 +1,19 @@
+/* --- Estilo para el Corazón de Favoritos --- */
+
+.favorite-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: var(--loader-1, #FF4500);
+  font-size: 20px;
+  text-shadow: 0 0 6px rgba(0,0,0,0.8);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  z-index: 10;
+}
+
+.channel-card.is-favorite .favorite-icon {
+  transform: scale(1);
+  opacity: 1;
+}

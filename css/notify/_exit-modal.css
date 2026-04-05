@@ -1,0 +1,163 @@
+/* ======================================= */
+/* ===  ESTILOS DEL MODAL DE SALIDA PLAYER === */
+/* ======================================= */
+#exit-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85); 
+    background-color: var(--overlay-bg);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+}
+
+#exit-modal-overlay.visible {
+opacity: 1;
+visibility: visible;
+pointer-events: auto;
+}
+
+.exit-modal-container {
+    background-color: var(--panel-bg);
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px var(--overlay-bg);
+    border: 1px solid var(--panel-inner);
+    text-align: center;
+    max-width: 450px;
+    transform: scale(0.9);
+    transition: transform 0.2s ease;
+}
+#exit-modal-overlay.visible .exit-modal-container {
+    transform: scale(1);
+}
+
+.exit-modal-container h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.exit-modal-container p {
+    font-size: 16px;
+    color: var(--text-sub);
+    margin: 0;
+    margin-bottom: 25px;
+}
+
+.exit-modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.exit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 50px;
+    padding: 10px 24px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+    background-color: var(--panel-inner);
+    color: var(--text-main);
+}
+
+.exit-btn.focused,
+.exit-btn:focus,
+.exit-btn:hover {
+    background-color: var(--accent);
+    color: var(--bg);
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px var(--overlay-bg);
+    -webkit-box-reflect: below 8px linear-gradient(to bottom, var(--panel-inner), var(--overlay-bg));
+}
+#home-exit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.90);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+#home-exit-modal.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.home-modal-container {
+    background: #1f1f1f;
+    border: 1px solid #333;
+    box-shadow: 0 0 50px rgba(0,0,0,1);
+    border-radius: 12px;
+    padding: 50px 80px;
+    text-align: center;
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-width: 500px;
+}
+
+#home-exit-modal.visible .home-modal-container {
+    transform: scale(1);
+}
+
+.home-modal-title {
+    color: #fff;
+    font-size: 32px;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.home-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.home-modal-btn {
+    background-color: #333;
+    color: #ccc;
+    border: 2px solid transparent;
+    font-size: 22px;
+    padding: 15px 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    min-width: 160px;
+    transition: all 0.2s;
+}
+
+.home-modal-btn.focused,
+.home-modal-btn:focus {
+    background-color: #e50914;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    border-color: white;
+}

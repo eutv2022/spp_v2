@@ -1,0 +1,254 @@
+/* css/componentes/_login.css */
+
+.view-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    padding: 40px 16px;
+    box-sizing: border-box;
+}
+
+#login-logo-container {
+    width: 200px;
+    height: 210px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: black;
+}
+
+.login-video-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    box-shadow: 0 0 10px var(--accent-glow-soft);
+    display: block;
+    
+}
+
+.login-container {
+    background-color: var(--element-bg);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 390px;
+    max-width: calc(100% - 40px);
+}
+
+.login-title {
+    font-size: 32px;
+    margin-bottom: 24px;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.login-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    background-color: rgba(50, 50, 50, 0.8);
+    color: var(--text-main);
+    font-size: 18px;
+    transition: box-shadow 0.18s ease-in-out, transform 0.18s ease-in-out, border 0.18s ease-in-out, background-color 0.18s;
+}
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--accent);
+    color: var(--color-black);
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.login-button i {
+    margin: 0;
+}
+
+.login-input.focused,
+.login-button.focused {
+    transform: scale(1.06);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow), inset 2px 2px 5px rgba(0, 0, 0, 0.9);
+    color: var(--accent) !important;
+    background-color: rgba(255,106,0,0.06);
+}
+
+.login-button.pressed {
+    transform: scale(0.98);
+    box-shadow: 0 0 12px rgba(0,0,0,0.6) inset;
+}
+.login-button.disabled {
+    background-color: #444 !important;
+    color: #888 !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: scale(1) !important;
+}
+.error-message {
+    color: var(--accent);
+    margin-top: 15px;
+    text-shadow: 0 0 5px var(--accent-glow-soft);
+    min-height: 1.2em;
+    text-align: center;
+}
+
+@media (max-height: 600px), (max-width: 480px) {
+    #login-logo-container { width: 160px; height: 170px; margin-bottom: 18px; }
+    .login-container { padding: 20px; width: 340px; }
+    .login-title { font-size: 28px; margin-bottom: 18px; }
+    .login-input { font-size: 16px; padding: 10px; }
+    .login-button { font-size: 16px; padding: 12px; }
+}
+.login-eula-container {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    cursor: pointer;
+    color: #ccc;
+    font-size: 0.9rem;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.login-eula-container input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.login-eula-container span {
+    text-align: left;
+}
+
+.login-eula-container a {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+.login-eula-container.focused {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    outline: 2px solid #2563eb;
+}
+#eula-text-body.focused {
+    border: 1px solid rgba(37, 99, 235, 0.5);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+#eula-text-body::-webkit-scrollbar {
+    width: 8px;
+}
+#eula-text-body::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
+#close-eula {
+    width: auto;
+    min-width: 150px;
+    padding: 10px 25px;
+    font-size: 16px;
+    margin: 0 auto;
+    display: block;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+#close-eula.focused, 
+#close-eula:focus {
+    background-color: #3b82f6 !important;
+    transform: scale(1.1);
+    border-color: white !important;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    font-weight: bold;
+}
+#eula-text-body {
+    display: block;
+    height: 300px;
+    overflow-y: hidden;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+#player-failed-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    background-image: url('../assets/placeholder/video_ph.png'); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: #1a1a1a;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: #ffffff;
+    font-family: "SamsungOne", sans-serif;
+    text-align: center;
+}
+
+#player-failed-placeholder h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    font-weight: bold;
+}
+
+#player-failed-placeholder p {
+    font-size: 32px;
+    margin-bottom: 50px;
+    color: #cccccc;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+.failed-buttons-row {
+    display: flex;
+    gap: 30px;
+}
+
+#player-failed-placeholder button {
+    padding: 15px 40px;
+    font-size: 28px;
+    border: 3px solid transparent;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#player-failed-placeholder button:focus,
+#player-failed-placeholder button.focus {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #00aaff;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0,170,255, 0.6);
+}

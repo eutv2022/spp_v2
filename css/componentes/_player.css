@@ -1,0 +1,428 @@
+
+.player-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent !important;
+    background: rgba(0,0,0,0) !important;
+    z-index: 100;
+}
+
+#av-player-object {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 101;
+}
+
+.controls-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 102;
+    background-image: 
+    linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 25%),
+    linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 40%);
+    padding: 30px 4%;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.player-view.show-controls .controls-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+#vod-controls,
+#live-controls {
+    display: none;
+}
+
+.player-view.mode-vod #vod-controls {
+    display: block;
+}
+
+.player-view.mode-live #live-controls {
+    display: block;
+}
+
+
+.player-view.buffering .player-spinner {
+    display: flex !important;
+}
+
+#top-zone {
+    position: absolute;
+    top: 30px;
+    left: 4%;
+    right: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#video-title {
+    color: var(--text-main);
+    font-size: 1.8em;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(0,0,0,0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#player-back-btn {
+    font-size: 2em;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#seek-zone {
+    position: absolute;
+    bottom: 120px;
+    left: 4%;
+    right: 4%;
+    display: flex;
+    align-items: center;
+}
+
+.time-display {
+    color: var(--text-main);
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+#vod-seek-bar {
+    flex-grow: 1;
+    margin: 0 20px;
+}
+
+#buttons-zone {
+    position: absolute;
+    bottom: 30px;
+    left: 4%;
+    right: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 2.2em;
+    padding: 0;
+    margin: 0 10px;
+    border-radius: 50%;
+    transform: scale(1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-btn.focused {
+    background-color: var(--element-bg);
+    color: var(--accent);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+#vod-seek-bar {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+#vod-seek-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    background: var(--text-main);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#seek-zone.focused #vod-seek-bar {
+    background: rgba(255, 106, 0, 0.4);
+}
+
+#seek-zone.focused #vod-seek-bar::-webkit-slider-thumb {
+     background: var(--accent);
+     box-shadow: 0 0 15px var(--accent-glow);
+     transform: scale(1.1);
+}
+
+.track-menu-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 104;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.track-menu-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.track-menu-container {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--element-bg);
+    border-radius: 8px;
+    width: 400px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+#track-menu-title {
+    color: var(--text-main);
+    font-size: 1.6em;
+    padding: 20px;
+    margin: 0;
+    border-bottom: 1px solid var(--element-bg);
+}
+
+#track-menu-list {
+    padding: 10px;
+}
+
+.track-item {
+    background: transparent;
+    border: none;
+    color: var(--text-sub);
+    font-size: 1.4em;
+    text-align: left;
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 4px;
+}
+
+.track-item.focused {
+    background-color: var(--accent);
+    color: var(--bg);
+    transform: scale(1.03);
+}
+
+.control-btn.disabled {
+    color: rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+}
+
+.control-btn.disabled.focused {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.3);
+    transform: scale(1);
+    box-shadow: none;
+    border-color: transparent;
+}
+.mode-specific-controls {
+    display: none;
+}
+
+.player-view.mode-vod #vod-controls-group {
+    display: block;
+}
+
+.player-view.mode-live #live-controls-group{
+    display: block;
+}
+
+#live-timer-zone {
+    position: absolute;
+    bottom: 120px;
+    left: 4%;
+    right: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-main);
+
+}
+#live-timer-zone .live-label {
+    font-size: 1.2em;
+    color: var(--text-sub);
+    margin-right: 10px;
+}
+#live-timer-zone .time-display {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+#live-buttons-zone {
+    position: absolute;
+    bottom: 30px;
+    left: 4%;
+    right: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);    
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999 !important; 
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+.spinner-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+    border: 6px solid rgba(255, 255, 255, 0.2);
+    border-top: 6px solid #ff6a00;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+.failed-placeholder {
+    position: absolute;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: #000000 !important;
+    z-index: 20000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    visibility: visible;
+}
+.failed-placeholder.hidden {
+    display: none !important;
+    visibility: hidden !important;
+    z-index: -1 !important;
+}
+
+.failed-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 1200px;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.failed-img {
+    width: 60%;
+    max-width: 700px;   
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 30px;
+    opacity: 1;
+}
+
+.failed-text-info {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.failed-text-info h2 {
+    color: #fff;
+    font-size: 32px;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.failed-text-info p {
+    color: #aaa;
+    font-size: 22px;
+    margin: 0;
+}
+
+.failed-buttons-row {
+    display: flex;
+    gap: 30px;
+}
+.failed-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000 !important;
+    background-image: url('../../assets/placeholder/video_ph.png') !important;
+    background-size: cover;
+    background-position: center;
+    display: none;
+    z-index: 25000;
+}
+
+.failed-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 60vh; 
+    width: 80%;
+    text-align: center;
+}
+
+.failed-content h2 {
+    color: #ff3333;
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); 
+}
+
+.failed-content p {
+    color: #cccccc;
+    font-size: 1.5rem;
+    max-width: 900px;
+    line-height: 1.4;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 1);
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

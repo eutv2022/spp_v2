@@ -1,0 +1,24 @@
+:root{
+    --bg: #000000;
+    --panel-bg: rgba(6,6,6,0.72);
+    --overlay-bg: rgba(0,0,0,0.6);
+    --element-bg: rgba(22,22,22,0.64);
+    --panel-inner: rgba(255,255,255,0.02);
+    --accent-glow-soft: rgba(255,106,0,0.12);
+    --accent-glow: rgba(255,106,0,0.28);
+    --tittle-color: rgba(240, 88, 0, 0.541);
+    --eula-header: #3e66bd;
+    --loader1: #FF4500;
+    --warning: #FF3D00;
+    --accent: #FF6A00;
+    --sucess: #e47900;
+    --star: #FFC107;
+    --text-sub: #B9B0A3;
+    --text-main: #F5E3C0;
+    --back-white: #dddddd;
+    --back-buton: #e7c9b1;
+    --meta-accent: rgba(245, 242, 240, 0.699);
+    --loader-accent: rgba(255, 255, 255, 0.2);
+    --watched: rgba(168, 166, 165, 0.8);
+    --watching: rgba(255, 106, 0, 0.8);
+}

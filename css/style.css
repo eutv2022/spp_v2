@@ -1,0 +1,19 @@
+/* style.css */
+
+@import url('base/_variables.css');
+@import url('base/_base.css');
+@import url('componentes/_buttons.css');
+@import url('componentes/_pill.css');
+@import url('animation/_anim.css');
+@import url('icons/_favorite.css');
+@import url('notify/_exit-modal.css');
+@import url('notify/_setting-modal.css');
+@import url('notify/_overlay.css');
+@import url('notify/_confirm-modal.css');
+@import url('componentes/_login.css');
+@import url('componentes/_home.css');
+@import url('componentes/_contentView.css');
+@import url('componentes/_movieDetails.css');
+@import url('componentes/_seriesDetails.css');
+@import url('componentes/_player.css');
+@import url('componentes/_settings.css');

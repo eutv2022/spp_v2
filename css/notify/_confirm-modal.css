@@ -1,0 +1,179 @@
+/* css/_confirm-modal.css */
+
+.confirm-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: var(--overlay-bg); 
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    backdrop-filter: blur(3px);
+}
+
+.confirm-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.confirm-box {
+    background-color: var(--panel-bg);
+    width: 650px;
+    padding: 30px 32px;
+    border-radius: 20px;
+    border: 1px solid var(--panel-inner);
+    box-shadow: 0 10px 40px var(--overlay-bg);
+    text-align: center;
+    transform: scale(0.95);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.confirm-overlay.visible .confirm-box {
+    transform: scale(1);
+}
+
+.confirm-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.confirm-title.danger {
+    color: var(--warning);
+}
+
+.confirm-text {
+    font-size: 16px;
+    color: var(--text-sub);
+    margin: 0 0 25px 0;
+    line-height: 1.4;
+}
+
+.confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.confirm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    padding: 0 28px;
+    min-width: 130px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: var(--panel-inner);
+    color: var(--text-sub);
+    
+    transition: all 0.15s ease;
+}
+
+.confirm-btn.focused,
+.confirm-btn:focus,
+.confirm-btn:hover {
+    background-color: var(--accent); 
+    color: var(--bg);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--tittle-color);
+    z-index: 1;
+}
+.sub-config-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.sub-config-item {
+    flex: 1;
+    position: relative !important;
+    min-width: 0;
+}
+.sub-selector-main-btn {
+    width: 100%;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    cursor: pointer;
+}
+.section-title-small {
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+.sub-selector-main-btn.focused {
+    background: #FF6A00 !important;
+    color: #000 !important;
+    border-color: #fff !important;
+    transform: scale(1.05);
+    z-index: 20;
+}
+
+.sub-dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 9999;
+  max-height: 320px;
+  overflow-y: auto;
+  background: #111;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  width: max-content;
+  width: 100%;
+}
+.settings-modal-overlay,
+.settings-modal-content {
+  overflow: visible !important;
+}
+
+.sub-dropdown-list.visible {
+    display: flex !important;
+    flex-direction: column !important;
+}
+.sub-dropdown-list.hidden { display: none !important; }
+.sub-dropdown-item {
+    width: 100%;
+    padding: 12px 15px;
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #222;
+    color: #ccc;
+    font-size: 14px;
+}
+.sub-dropdown-item.active {
+    color: #FF6A00;
+    font-weight: bold;
+}
+.sub-dropdown-item.focused,
+.sub-dropdown-item:focus,
+.sub-dropdown-item:hover {
+    background-color: #FF6A00;
+    color: #000;
+}
