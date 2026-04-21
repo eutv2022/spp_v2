@@ -4,7 +4,7 @@ import { apiGet } from '../../../utils/apiModule.js';
 import { Logger } from '../../../utils/logger.js';
 
 // --- NUESTRA ÚNICA FUENTE DE VERDAD (TU PANEL) ---
-const PANEL_URL = 'http://192.168.100.7:8000/api/worldtv/check_device';;
+const PANEL_URL = 'http://192.168.100.7:8000/api/worldtv/check_device';
 
 function getFriendlyErrorMessage(errorMsg) {
     const msg = String(errorMsg).toLowerCase();
