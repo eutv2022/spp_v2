@@ -1,5 +1,9 @@
 {
   "appId": "com.worldtv.pro",
   "appName": "WorldTV Pro",
-  "webDir": "www"
+  "webDir": "www",
+  "server": {
+    "cleartext": true,
+    "androidScheme": "http"
+  }
 }
