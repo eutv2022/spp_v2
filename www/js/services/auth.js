@@ -2,6 +2,7 @@
 
 import { apiGet } from '../../../utils/apiModule.js';
 import { Logger } from '../../../utils/logger.js';
+import { Device } from '@capacitor-community/device';
 
 // --- NUESTRA ÚNICA FUENTE DE VERDAD (TU PANEL) ---
 const PANEL_URL = 'http://192.168.100.7:8080/api/worldtv/check_device';
@@ -26,7 +27,7 @@ const auth = {
      * La pantalla inicial de tu app debe llamar a esta función.
      */
     checkDevicePanel: async function() {
-        let deviceId = this.getDeviceId();
+        let deviceId = await this.getDeviceId();
 
         try {
             // Le preguntamos a TU PANEL si este cliente está al día
@@ -99,7 +100,7 @@ const auth = {
      */
     validateCurrentSession: async function() {
         try {
-            const deviceId = this.getDeviceId();
+            const deviceId = await this.getDeviceId();
             
             // A) Preguntamos al Panel (Nuestra fuente de verdad)
             const resPanel = await fetch(`${PANEL_URL}?device_id=${deviceId}`);
@@ -146,15 +147,19 @@ const auth = {
     /**
      * 5. GENERADOR DE MAC/DEVICE ID
      */
-    getDeviceId: function() {
-        let deviceId = localStorage.getItem('mi_device_id');
-        if (!deviceId) {
-            const pares = Array.from({length: 3}, () => Math.floor(Math.random() * 100).toString().padStart(2, '0'));
-            deviceId = pares.join(':');
-            localStorage.setItem('mi_device_id', deviceId);
-        }
-        return deviceId;
-    }
+    getDeviceId: async function() {
+    // 1. Obtenemos el ID único del hardware (esto no cambia al reinstalar)
+    const info = await Device.getId(); 
+    // Limpiamos por si acaso hay caracteres raros y pasamos a Mayúsculas
+    const rawId = info.identifier.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+    
+    // 2. Extraemos solo los primeros 4 caracteres para hacer 2 pares
+    const parte1 = rawId.substring(0, 2);
+    const parte2 = rawId.substring(2, 4);
+    
+    // Resultado final: "AA:BB"
+    return `${parte1}:${parte2}`;
+}
 };
 
 export { auth };

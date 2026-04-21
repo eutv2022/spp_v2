@@ -64,7 +64,9 @@ export function setupLoginPage() {
     const videoElement = document.querySelector('.login-video-logo');
 
     // Mostramos el Device ID en pantalla inmediatamente
-    macAddressDisplay.textContent = auth.getDeviceId();
+    auth.getDeviceId().then(id => {
+    macAddressDisplay.textContent = id;
+});
 
     const exitApp = () => {
         try {
