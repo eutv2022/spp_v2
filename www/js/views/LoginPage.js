@@ -171,10 +171,11 @@ export function setupLoginPage() {
                     errorDiv.style.color = "#F44336"; // Rojo error
                     errorDiv.textContent = errorMsg.split(':')[1];
                 } else {
-                    // Error de red o error del servidor IPTV
-                    errorDiv.style.color = "#F44336";
-                    errorDiv.textContent = errorMsg || "Error de conexión con el servidor.";
-                }
+    // Esto te mostrará la IP que la App está intentando tocar y el error real
+    errorDiv.style.color = "#F44336";
+    errorDiv.textContent = `Error: ${errorMsg} | URL: ${PANEL_URL}`;
+    console.error("DEBUG URL:", PANEL_URL);
+}
             }
         }
     });

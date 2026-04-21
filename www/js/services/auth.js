@@ -4,17 +4,20 @@ import { apiGet } from '../../../utils/apiModule.js';
 import { Logger } from '../../../utils/logger.js';
 
 // --- NUESTRA ÚNICA FUENTE DE VERDAD (TU PANEL) ---
-const PANEL_URL = 'http://192.168.100.7:8000/api/worldtv/check_device';
+const PANEL_URL = 'http://192.168.100.7:8080/api/worldtv/check_device';
 
 function getFriendlyErrorMessage(errorMsg) {
     const msg = String(errorMsg).toLowerCase();
-    if (msg.includes("401")) return "❌ Usuario o contraseña incorrectos en el servidor origen.";
-    if (msg.includes("403")) return "⛔ Tu cuenta ha expirado o está desactivada por el proveedor.";
-    if (msg.includes("404")) return "⚠️ Error de conexión (Servidor no encontrado).";
-    if (msg.includes("500") || msg.includes("502") || msg.includes("520")) return "🛠️ Servidor origen en mantenimiento.";
-    if (msg.includes("network") || msg.includes("fetch") || msg.includes("failed")) return "📡 Sin conexión a internet.";
-    if (msg.includes("timeout")) return "🐢 Tiempo de espera agotado.";
-    return msg.replace(/error:/gi, "").trim() || "Error desconocido.";
+    // AGREGAMOS ESTA ALERTA TEMPORAL PARA DEBUG
+    alert("LOG TÉCNICO: " + errorMsg); 
+
+    if (msg.includes("401")) return "❌ Usuario o contraseña incorrectos.";
+    if (msg.includes("403")) return "⛔ Cuenta desactivada.";
+    // Si Android bloquea el HTTP, el error suele decir "Failed to fetch" o "Network Error"
+    if (msg.includes("network") || msg.includes("fetch") || msg.includes("failed")) {
+        return "📡 Error de Red: Android bloqueó la conexión HTTP. Revisa el Cleartext.";
+    }
+    return msg;
 }
 
 const auth = {
