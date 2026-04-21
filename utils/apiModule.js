@@ -1,18 +1,6 @@
 // Utils/apiModule.js
 import { Logger } from './logger.js';
 
-// Intentamos leer la URL configurada por ConfigLoader, si no, usamos la default
-const storedUrl = sessionStorage.getItem('API_BASE_URL');
-
-const ApiConfig = {
-    BASE_URL: storedUrl || "http://liontv.es:8080", 
-    TIMEOUT: 15000,
-    VERSION: "1.0.0"
-};
-window.ApiConfig = ApiConfig; 
-
-Logger.debug(`[ApiModule] Base URL: ${ApiConfig.BASE_URL}`);
-
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const TMDB_API_KEY = "58d45b70f6e7483ed3caaa69b740ef3d"; 
 const DEFAULT_TIMEOUT = 15000;
@@ -27,48 +15,57 @@ function fetchWithTimeout(resource, options = {}) {
   ]);
 }
 
-// Función para recuperar usuario/contraseña
-function getAuthParams() {
-    // 1. Intentamos leer de localStorage directo (lo más seguro)
-    const u = localStorage.getItem('username');
-    const p = localStorage.getItem('password');
-    if (u && p) return `username=${u}&password=${p}`;
-
-    // 2. Si no, intentamos leer del AUTH_JSON (backup)
-    const json = localStorage.getItem('AUTH_JSON');
-    if (json) {
-        try {
-            const parsed = JSON.parse(json);
-            const info = parsed.user_info || parsed.user;
-            if (info && info.username && info.password) {
-                return `username=${info.username}&password=${info.password}`;
-            }
-        } catch (e) {}
+/**
+ * 1. OBTENER URL BASE DIRECTO DEL LOCALSTORAGE
+ */
+function getBaseUrl() {
+    const serverUrl = localStorage.getItem('server_url');
+    if (!serverUrl) {
+        Logger.warn('[ApiModule] No hay server_url en localStorage. La app no está logeada.');
+        return ""; 
     }
+    return serverUrl.replace(/\/$/, ""); // Quitamos la barra final por seguridad
+}
+
+/**
+ * 2. OBTENER CREDENCIALES DIRECTO DEL LOCALSTORAGE
+ * Las llaves exactas que inyectará nuestro puente
+ */
+function getAuthParams() {
+    const u = localStorage.getItem('iptv_user');
+    const p = localStorage.getItem('iptv_pass');
     
+    if (u && p) {
+        return `username=${u}&password=${p}`;
+    }
     return '';
 }
 
+/**
+ * 3. MOTOR PRINCIPAL DE LLAMADAS GET A XTREAM CODES
+ */
 export async function apiGet(actionParams, customOptions = {}) {
   try {
+    const baseUrl = getBaseUrl();
     const auth = getAuthParams();
+    
+    if (!baseUrl || !auth) {
+        throw new Error("Credenciales faltantes. El usuario debe pasar por la pantalla de vinculación.");
+    }
+
     let url;
 
-    // --- LÓGICA DE CONSTRUCCIÓN DE URL (CORREGIDA) ---
-    
-    // Si la URL base termina en slash, se lo quitamos para evitar duplicados
-    const baseUrl = ApiConfig.BASE_URL.replace(/\/$/, "");
-
-    if (actionParams.includes('player_api.php')) {
-        // Caso A: Ya viene la ruta completa (ej: login inicial)
-        url = `${baseUrl}${actionParams}`;
+    // Construcción inteligente de la URL
+    if (actionParams.includes('player_api.php') || actionParams.includes('api.php')) {
+        // Si el parámetro ya trae el archivo base (usualmente el primer login que hace la app)
+        const separator = actionParams.includes('?') ? '&' : '?';
+        url = `${baseUrl}/${actionParams.replace(/^\//, '')}${separator}${auth}`;
     } else {
-        // Caso B: Son parámetros sueltos (ej: &action=get_live_categories)
-        // AQUÍ ES DONDE ESTABA EL ERROR. Agregamos /player_api.php?
-        
-        // Nos aseguramos de que haya un '?' antes de los params
-        const separator = auth ? '&' : ''; 
-        url = `${baseUrl}/player_api.php?${auth}${separator}${actionParams.replace(/^\?|&/, "")}`;
+        // Llamadas estándar (ej: action=get_live_categories)
+        // Nos aseguramos de inyectar player_api.php siempre
+        const cleanAction = actionParams.replace(/^\?|&/, "");
+        const separator = cleanAction ? '&' : '';
+        url = `${baseUrl}/player_api.php?${auth}${separator}${cleanAction}`;
     }
 
     const options = {
@@ -76,7 +73,7 @@ export async function apiGet(actionParams, customOptions = {}) {
         ...customOptions 
     };
 
-    // Logger.debug(`API Call: ${url}`); // Descomenta si quieres ver la URL completa
+    // Logger.debug(`[ApiModule] Fetching: ${url}`); // Descomenta para debugear
 
     const response = await fetchWithTimeout(url, options);
     
@@ -89,24 +86,9 @@ export async function apiGet(actionParams, customOptions = {}) {
   }
 }
 
-export async function apiPost(endpoint, data) {
-  try {
-    const baseUrl = ApiConfig.BASE_URL.replace(/\/$/, "");
-    const url = `${baseUrl}${endpoint}`;
-    const response = await fetchWithTimeout(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
-    if (!response.ok) throw new Error(`POST ${endpoint} failed`);
-    return await response.json();
-  } catch (error) {
-    Logger.error(`API POST fail: ${endpoint}`, error);
-    throw error;
-  }
-}
-
-// --- TMDB (IGUAL QUE SIEMPRE) ---
+/**
+ * 4. FUNCIONES DE TMDB (SE MANTIENEN INTACTAS)
+ */
 export async function fetchFromTMDB(path, params = {}) {
   try {
     const query = new URLSearchParams({

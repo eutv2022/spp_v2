@@ -5,17 +5,19 @@ export const Validator = {
     return typeof value === "string" && value.trim().length > 0;
   },
 
+  // Relajamos las reglas: En IPTV a veces hay usuarios/passwords muy cortos (ej: "123")
+  // Con que no estén vacíos, nos damos por servidos.
   isValidUsername: (username) => {
-    return Validator.isNonEmptyString(username) && username.length >= 5;
+    return Validator.isNonEmptyString(username);
   },
 
   isValidPassword: (password) => {
-    return Validator.isNonEmptyString(password) && password.length >= 4;
+    return Validator.isNonEmptyString(password);
   },
-/** 
-  * @param {object} json
-  * @param {string[]} requiredFields
-  */
+
+  /** * @param {object} json
+   * @param {string[]} requiredFields
+   */
   isValidApiResponse: (json, requiredFields = []) => {
     if (!json || typeof json !== "object") return false;
     if (requiredFields.length === 0) return true;
